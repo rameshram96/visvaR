@@ -10,7 +10,7 @@ library(officer)
 library(flextable)
 library(bslib)
 
-# Define UI
+correlation<-function(){
 ui <- fluidPage(
   theme = bs_theme(
     version = 5,
@@ -247,3 +247,4 @@ server <- function(input, output, session) {
 
 # Run the Shiny app
 shinyApp(ui = ui, server = server)
+}

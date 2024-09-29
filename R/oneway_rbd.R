@@ -9,7 +9,7 @@ library(tibble)
 library(tidyr)
 library(bslib)
 library(patchwork)
-
+oneway_rbd<-function(){
 ui <- page_fluid(
   theme = bs_theme(
     version = 5,
@@ -334,3 +334,4 @@ server <- function(input, output, session) {
 }
 
 shinyApp(ui, server)
+}

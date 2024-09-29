@@ -1,13 +1,34 @@
 Package: visvaR
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: Visuvalize Variance - Shiny-Based ANOVA and Statistical Solutions for Agricultural Research
+Version: 1.0.0
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+    person("Ramesh", "Ramasamy", , "ramesh.rahu96@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-5433-1417"))
+    person("Mathiyarasi", "Kulandhaivadivel", , "mathiarasi6@gmail.com", role = c("aut"),
+           )
+    person("Tamilselvan", "Arumugam", , "tamilselvan372511@gmail.com", role = c("aut"),
+           )
+Description: Intuitive Shiny applications tailored for agricultural research data analysis, including one-way and two-way ANOVA, correlation, and other essential statistical tools. Users can easily upload their datasets, perform analyses, and download the results as a well-formatted Word document, streamlining the process of data analysis and reporting in agricultural research.
 License: AGPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 URL: https://github.com/rameshram96/visvaR
 BugReports: https://github.com/rameshram96/visvaR/issues
+Imports: 
+    agricolae,
+    bslib,
+    corrplot,
+    dplyr,
+    DT,
+    flextable,
+    ggcorrplot,
+    ggplot2,
+    officer,
+    openxlsx,
+    patchwork,
+    readxl,
+    shiny,
+    stats,
+    tibble,
+    tidyr
