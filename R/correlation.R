@@ -27,7 +27,7 @@ ui <- fluidPage(
   ),
   h1("Correlation Analysis",
      style = "font-family:Times New Roman; font-weight: bold; font-size: 36px; color: #4CAF50;"),
-  
+
   sidebarLayout(
     sidebarPanel(
       position="right",
@@ -38,7 +38,7 @@ ui <- fluidPage(
                   choices = c("pearson", "kendall", "spearman")),
       actionButton("analyze", "Analyze",style = "color: royalblue; font-size: 20px;"),
       hr(),
-      selectInput("font_family", "Choose Font Style:", 
+      selectInput("font_family", "Choose Font Style:",
                   choices = c("serif", "sans", "mono", "Arial", "Helvetica", "Times New Roman")),
       numericInput("font_size", "Font Size:", value = 12, min = 8, max = 20),
       selectInput("color_palette", "Choose Color Palette:",
@@ -69,10 +69,9 @@ ui <- fluidPage(
           <span>ramesh.rahu96@gmail.com</span>
         </p>
         "),
-                   card_image("visvaR.png",
+                   card_image(src="https://github.com/rameshram96/visvaR/blob/main/visvaRlogo.png",
                               style = "display: block; margin-left: auto; margin-right: auto;",
                               alt = "",
-                              src = NULL,
                               href = NULL,
                               border_radius = c("auto"),
                               mime_type = NULL,
@@ -85,10 +84,10 @@ ui <- fluidPage(
                  )
           )
         ),
-        
+
       ),
     ),
-    
+
     mainPanel(
       tabsetPanel(
         tabPanel("Data Preview", DTOutput("data_preview")),
@@ -100,11 +99,11 @@ ui <- fluidPage(
 )
 # Define server logic
 server <- function(input, output, session) {
-  
+
   data <- reactiveVal(NULL)
   correlation_matrix <- reactiveVal(NULL)
   original_names <- reactiveVal(NULL)
-  
+
   observeEvent(input$clipboard_input, {
     tryCatch({
       df <- read.delim("clipboard", header = TRUE, check.names = FALSE)
@@ -115,11 +114,11 @@ server <- function(input, output, session) {
       showNotification("Error reading from clipboard. Please try again.", type = "error")
     })
   })
-  
+
   observeEvent(input$file, {
     req(input$file)
     ext <- tools::file_ext(input$file$name)
-    
+
     tryCatch({
       if (ext == "csv") {
         df <- read.csv(input$file$datapath, header = TRUE, check.names = FALSE)
@@ -135,41 +134,41 @@ server <- function(input, output, session) {
       showNotification(paste("Error reading file:", e$message), type = "error")
     })
   })
-  
+
   output$data_preview <- renderDT({
     req(data())
     datatable(data(), options = list(scrollX = TRUE, scrollY = "400px", pageLength = 15))
   })
-  
+
   observeEvent(input$analyze, {
     req(data())
     M <- cor(data(),method = input$method)
     correlation_matrix(M)
   })
-  
+
   create_correlation_plot <- function() {
     req(correlation_matrix())
-    
+
     M <- correlation_matrix()
     res1 <- cor.mtest(data(), conf.level = 0.95)
-    
+
     par(mfrow = c(1, 1), mar = c(5, 4, 4, 2) + 0.1, family = input$font_family)
-    
+
     corrplot(M, p.mat = res1$p, order = "AOE", type = "upper", tl.pos = "lt", tl.col = "black",
              insig = "label_sig", sig.level = c(0.001, 0.01, 0.05), pch.cex = 2, pch.col = "black",
-             tl.cex = input$font_size / 12, cl.cex = input$font_size / 12, tl.srt = 45, 
+             tl.cex = input$font_size / 12, cl.cex = input$font_size / 12, tl.srt = 45,
              col = COL2(input$color_palette, 10),
              tl.offset = 0.5)
-    
+
     corrplot(M, add = TRUE, type = "lower", method = "number", col = "black",
              number.cex = input$font_size / 12, order = "AOE", diag = FALSE,
              tl.pos = "n", cl.pos = "n", tl.cex = input$font_size / 12, tl.srt = 45)
   }
-  
+
   output$correlation_plot <- renderPlot({
     create_correlation_plot()
   })
-  
+
   output$correlation_matrix <- renderDT({
     req(correlation_matrix())
     matrix_with_names <- correlation_matrix()
@@ -177,7 +176,7 @@ server <- function(input, output, session) {
     rownames(matrix_with_names) <- original_names()
     datatable(round(matrix_with_names, 2), options = list(scrollX = TRUE, scrollY = "400px"))
   })
-  
+
   output$download_plot <- downloadHandler(
     filename = function() {
       paste("correlation_plot_", Sys.Date(), ".png", sep = "")
@@ -188,7 +187,7 @@ server <- function(input, output, session) {
       dev.off()
     }
   )
-  
+
   output$download_word <- downloadHandler(
     filename = function() {
       paste("correlation_analysis_report_", Sys.Date(), ".docx", sep = "")
@@ -207,9 +206,9 @@ server <- function(input, output, session) {
         run_footnote(x = bl, prop = fp_refnote),
         ""
       )
-      
+
       doc <- body_add_fpar(doc, value = a_par, style = "Normal")
-      
+
       set_flextable_defaults(
         font.size = 12, font.family = "Times New Roman",
         font.color = "#333333",
@@ -223,15 +222,15 @@ server <- function(input, output, session) {
       png(temp_plot, width = input$plot_width, height = input$plot_height, units = "in", res = input$plot_dpi)
       create_correlation_plot()
       dev.off()
-      
+
       doc <- doc %>%
         body_add_par("Correlation Plot", style = "heading 2") %>%
         body_add_img(src = temp_plot, width = 6, height = 6)
-      
+
       # Add correlation matrix
       doc <- doc %>%
         body_add_par("Correlation Matrix", style = "heading 2")
-      
+
       matrix_with_names <- correlation_matrix()
       colnames(matrix_with_names) <- original_names()
       rownames(matrix_with_names) <- original_names()
@@ -240,7 +239,7 @@ server <- function(input, output, session) {
       matrix_table<-add_footer_lines(matrix_table,paste("Method used:", input$method))
       doc <- doc %>%
         body_add_flextable(matrix_table)
-      
+
       print(doc, target = file)
     }
   )
