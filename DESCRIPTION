@@ -1,13 +1,12 @@
 Package: visvaR
 Title: Visuvalize Variance - Shiny-Based ANOVA and Statistical Solutions for Agricultural Research
 Version: 1.0.0
-Authors@R: 
+Authors@R: c(
     person("Ramesh", "Ramasamy", , "ramesh.rahu96@gmail.com", role = c("aut", "cre"),
-           comment = c(ORCID = "0000-0002-5433-1417"))
-    person("Mathiyarasi", "Kulandhaivadivel", , "mathiarasi6@gmail.com", role = c("aut"),
-           )
-    person("Tamilselvan", "Arumugam", , "tamilselvan372511@gmail.com", role = c("aut"),
-           )
+           comment = c(ORCID = "0000-0002-5433-1417")),
+    person("Mathiyarasi", "Kulandaivadivel", , "mathiarasi6@gmail.com", role = "ctb"),
+    person("Tamilselvan", "Arumugam", , "tamilselvan372511@gmail.com", role ="ctb")
+    )
 Description: Intuitive Shiny applications tailored for agricultural research data analysis, including one-way and two-way ANOVA, correlation, and other essential statistical tools. Users can easily upload their datasets, perform analyses, and download the results as a well-formatted Word document, streamlining the process of data analysis and reporting in agricultural research.
 License: AGPL (>= 3)
 Encoding: UTF-8

@@ -1,15 +1,3 @@
-# Load required libraries
-library(shiny)
-library(corrplot)
-library(stats)
-library(ggcorrplot)
-library(readxl)
-library(openxlsx)
-library(DT)
-library(officer)
-library(flextable)
-library(bslib)
-
 correlation<-function(){
 ui <- fluidPage(
   theme = bs_theme(
@@ -69,7 +57,7 @@ ui <- fluidPage(
           <span>ramesh.rahu96@gmail.com</span>
         </p>
         "),
-                   card_image(src="https://github.com/rameshram96/visvaR/blob/main/visvaRlogo.png",
+                   card_image(src = system.file("www/visvaRlogo.png", package = "visvaR"),
                               style = "display: block; margin-left: auto; margin-right: auto;",
                               alt = "",
                               href = NULL,

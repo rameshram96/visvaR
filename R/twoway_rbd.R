@@ -1,14 +1,4 @@
-library(shiny)
-library(readxl)
-library(ggplot2)
-library(dplyr)
-library(agricolae)
-library(flextable)
-library(officer)
-library(tibble)
-library(tidyr)
-library(bslib)
-library(patchwork)
+
 twoway_rbd<-function(){
 ui <- page_fluid(
   theme = bs_theme(
@@ -45,7 +35,8 @@ ui <- page_fluid(
       <span>ramesh.rahu96@gmail.com</span>
     </p>
   "),
-card_image(src="https://github.com/rameshram96/visvaR/blob/main/visvaRlogo.png",
+addResourcePath("resources", system.file("www", package = "visvaR")),
+card_image(src = system.file(src = "resources/visvaRlogo.png",),
                      style = "display: block; margin-left: auto; margin-right: auto;",
                      alt = "",
                      href = NULL,
@@ -98,7 +89,7 @@ card_image(src="https://github.com/rameshram96/visvaR/blob/main/visvaRlogo.png",
       card_body(
         tabsetPanel(
           tabPanel("Data Preview", DT::DTOutput("preview")),
-          tabPanel("OUTPUT",
+          tabPanel("",
                    uiOutput("analysis_outputs")
           )
         ),
