@@ -1,3 +1,35 @@
+#' @import shiny
+#' @import dplyr
+#' @import ggplot2
+#' @import agricolae
+#' @import bslib
+#' @import corrplot
+#' @import dplyr
+#' @import DT
+#' @import flextable
+#' @import ggcorrplot
+#' @import ggplot2
+#' @import officer
+#' @import openxlsx
+#' @import patchwork
+#' @import stats
+#' @import tibble
+#' @import tidyr
+#' @importFrom readxl read_xlsx
+#' @import agricolae
+#' @import bslib
+#' @import corrplot
+#' @importFrom dplyr select mutate group_by summarize
+#' @importFrom DT datatable
+#' @import flextable
+#' @import ggcorrplot
+#' @import ggplot2
+#' @importFrom officer add_slide
+#' @import openxlsx
+#' @import patchwork
+#' @import tibble
+#' @import tidyr
+NULL
 correlation<-function(){
 ui <- fluidPage(
   theme = bs_theme(

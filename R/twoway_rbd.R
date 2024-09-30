@@ -1,4 +1,34 @@
-
+#' @import shiny
+#' @import dplyr
+#' @import ggplot2
+#' @import agricolae
+#' @import bslib
+#' @import corrplot
+#' @import dplyr
+#' @import DT
+#' @import flextable
+#' @import ggcorrplot
+#' @import ggplot2
+#' @import officer
+#' @import openxlsx
+#' @import patchwork
+#' @import stats
+#' @import tibble
+#' @import tidyr
+#' @import agricolae
+#' @import bslib
+#' @import corrplot
+#' @importFrom dplyr select mutate group_by summarize
+#' @importFrom DT datatable
+#' @import flextable
+#' @import ggcorrplot
+#' @import ggplot2
+#' @importFrom officer add_slide
+#' @import openxlsx
+#' @import patchwork
+#' @import tibble
+#' @import tidyr
+NULL
 twoway_rbd<-function(){
 ui <- page_fluid(
   theme = bs_theme(
