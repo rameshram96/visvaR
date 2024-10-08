@@ -1,4 +1,5 @@
 #' Run the Shiny App for performing one-way ANOVA on data from a Randomized block design
+#'
 #' App allows user to import data through excel/.csv files or through clipboard
 #' and user can select the post-hoc test method and download the report which contains anova results and plots
 #'
@@ -12,8 +13,10 @@
 #' method, and download outputs.
 #'
 #' @usage twoway_rbd()
-#' @name twoway_anova_rbd
+#' @name twoway_rbd
 #' @author Ramesh Ramasamy
+#' @author Mathiyarsai Kulandaivadivel
+#' @author Tamilselvan Arumugam
 #' @import dplyr
 #' @import ggplot2
 #' @import agricolae

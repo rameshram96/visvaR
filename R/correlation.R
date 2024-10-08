@@ -15,8 +15,10 @@
 #'
 #' @usage correlation_multi()
 #'
-#' @name Correlation_multiple_variables
+#' @name correlation_multi()
 #' @author Ramesh Ramasamy
+#' @author Mathiyarsai Kulandaivadivel
+#' @author Tamilselvan Arumugam
 #' @import DT
 #' @import corrplot
 #' @import bslib

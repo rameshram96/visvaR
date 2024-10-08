@@ -13,8 +13,10 @@
 #' method, and download outputs.
 #'
 #' @usage oneway_rbd()
-#' @name oneway_anova_rbd
+#' @name oneway_rbd
 #' @author Ramesh Ramasamy
+#' @author Mathiyarsai Kulandaivadivel
+#' @author Tamilselvan Arumugam
 #' @import dplyr
 #' @import ggplot2
 #' @import agricolae

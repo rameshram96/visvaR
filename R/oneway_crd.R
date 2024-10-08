@@ -13,8 +13,10 @@
 #' method, and download outputs.
 #'
 #' @usage oneway_crd()
-#' @name one_way_anova_crd
+#' @name oneway_crd
 #' @author Ramesh Ramasamy
+#' @author Mathiyarsai Kulandaivadivel
+#' @author Tamilselvan Arumugam
 #' @import dplyr
 #' @import ggplot2
 #' @import agricolae
