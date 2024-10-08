@@ -15,6 +15,8 @@
 #'
 #' @usage correlation_multi()
 #'
+#' @name Correlation_multiple_variables
+#' @author Ramesh Ramasamy
 #' @import DT
 #' @import corrplot
 #' @import bslib

@@ -13,8 +13,8 @@
 #' method, and download outputs.
 #'
 #' @usage twoway_crd()
-#'
-
+#' @name twoway_anova_crd
+#' @author Ramesh Ramsamy
 #' @import dplyr
 #' @import ggplot2
 #' @import agricolae

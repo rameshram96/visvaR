@@ -12,7 +12,8 @@
 #' method, and download outputs.
 #'
 #' @usage twoway_rbd()
-#'
+#' @name twoway_anova_rbd
+#' @author Ramesh Ramasamy
 #' @import dplyr
 #' @import ggplot2
 #' @import agricolae
