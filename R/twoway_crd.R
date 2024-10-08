@@ -1,3 +1,20 @@
+#'Run the Shiny App for performing two-way ANOVA on data from a completely randomized design.
+#'
+#' App allows user to import data through excel/.csv files or through clipboard
+#' and user can select the post-hoc test method and download the report which contains anova results and plots
+#'
+#' @details
+#' This Shiny app is part of the `visvaR` package and is designed for
+#' analysis of variance on data from completely randomized design (two factor) and user can download the report in word format.
+#'
+#' @return
+#' This function runs a local instance of the Shiny app in your default web
+#' browser. The app interface allows users to upload data, select analysis
+#' method, and download outputs.
+#'
+#' @usage twoway_crd()
+#'
+
 #' @import dplyr
 #' @import ggplot2
 #' @import agricolae
