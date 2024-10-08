@@ -1,5 +1,5 @@
 Package: visvaR
-Title: Visuvalize Variance - Shiny-Based ANOVA and Statistical Solutions for Agricultural Research
+Title  : Visuvalize Variance - Shiny-Based ANOVA and Statistical Solutions for Agricultural Research
 Version: 1.0.0
 Authors@R: c(
     person("Ramesh", "Ramasamy", , "ramesh.rahu96@gmail.com", role = c("aut", "cre"),
