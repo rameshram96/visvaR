@@ -1,63 +1,54 @@
-#' @import shiny
 #' @import dplyr
 #' @import ggplot2
 #' @import agricolae
 #' @import bslib
 #' @import corrplot
-#' @import dplyr
-#' @import DT
 #' @import flextable
 #' @import ggcorrplot
-#' @import ggplot2
 #' @import officer
-#' @import openxlsx
-#' @import patchwork
-#' @import stats
-#' @import tibble
-#' @import tidyr
-#' @import agricolae
-#' @import bslib
-#' @import corrplot
-#' @importFrom dplyr select mutate group_by summarize
-#' @importFrom DT datatable
-#' @import flextable
-#' @import ggcorrplot
-#' @import ggplot2
-#' @import openxlsx
 #' @import patchwork
 #' @import tibble
 #' @import tidyr
+#' @importFrom rlang .data
+#' @importFrom ggplot2 aes
+#' @importFrom shiny h1 div fluidRow fileInput actionButton strong selectInput textInput numericInput downloadButton tabsetPanel tabPanel uiOutput reactiveVal renderUI observeEvent req showNotification renderPrint renderPlot tagList h3 verbatimTextOutput plotOutput hr removeNotification downloadHandler
+#' @importFrom stats aov anova fitted resid sd deviance
+#' @importFrom grDevices png dev.off
+#' @importFrom graphics par
+#' @importFrom shiny tags shinyApp
+
 NULL
+utils::globalVariables(c("Fitted",'read_excel', "Residuals", "Sample", "Factor_A", "Response", "avg_A", "se",'captionpaste'))
 oneway_crd<-function(){
-ui <- page_fluid(
-  theme = bs_theme(
-    version = 5,
-    bootswatch = "simplex",
-    primary = "#007bff",
-    "font-size-base" = "0.95rem"
-  ),
-  tags$head(
-    tags$style(HTML("
+  ui<- page_fluid(
+    theme = bs_theme(
+      version = 5,
+      bootswatch = "simplex",
+      primary = "#007bff",
+      "font-size-base" = "0.95rem"
+    ),
+    tags$head(
+      tags$style(HTML("
       h1 {
         text-align: center;
       }
     "))
-  ),
+    ),
 
-  # Center-aligned title
-  h1("One-way Completely Randomized Design (CRD)",
-     style = "font-family:Times New Roman; font-weight: bold; font-size: 36px; color: #4CAF50;"),
-  layout_columns(
-    col_widths = c(3, 9),
-    card( height = "45",
-          card_header(
-            div(
-              class = "text-center",
-              "visvaR- VISualize VARiance"
+    # Center-aligned title
+    h1("One-way Completely Randomized Design (CRD)",
+       style = "font-family:Times New Roman; font-weight: bold; font-size: 36px; color: #4CAF50;"),
+    layout_columns(
+      col_widths = c(3, 9),
+      card( height = "45",
+            card_header(
+              div(
+                class = "text-center",
+                "visvaR- VISualize VARiance"
+              ),
+              class = "bg-primary text-white"
             ),
-            class = "bg-primary text-white"
-          ),
-          HTML("
+            HTML("
     <p style='text-align: center;'>
       <strong>Developed by</strong><br>
       <span style='font-size: 24px;'>Ramesh R</span><br>
@@ -66,69 +57,57 @@ ui <- page_fluid(
       <span>ramesh.rahu96@gmail.com</span>
     </p>
   "),
-          card_image(src = system.file("www/visvaRlogo.png", package = "visvaR"),
-                     style = "display: block; margin-left: auto; margin-right: auto;",
-                     alt = "",
-                     href = NULL,
-                     border_radius = c("auto"),
-                     mime_type = NULL,
-                     class = NULL,
-                     height ="50%",
-                     fill = FALSE,
-                     width = "50%",
-                     container = NULL
-          )
-    ),
-    card( height = "auto",
-          card_header(
-            div( class="text-center",
-                 "Data Input and Analysis Options",
-                 height= "120px",
-                 class = "bg-primary text-white"
-            )),
-          card_body(
-            fluidRow(
-              fileInput("file", "Choose .xlsx or .csv", accept = c(".xlsx", ".csv")),
-              actionButton("clipboard_button","Use Clipboard Data", class = "text-black",
-                           style = "width: 700px; height:35px; float:center;margin-top: 30px;",
-                           title="Click here to paste your clipboard data"),
-              strong("Choose acccording to your need", align='center'),
-              selectInput("test_method", "Choose Post-Hoc Test",
-                          choices = c("LSD" = "LSD.test",
-                                      "Duncan" = "duncan.test",
-                                      "Tukey HSD" = "HSD.test",
-                                      "Student-Newman-Keuls" = "SNK.test")),
-              textInput("bar_color", "Bar Color (name or hex code)", value = "coral1"),
-              selectInput("font_family", "Font Style for plot",
-                          choices = c("Sans" = "sans", "Serif" = "serif", "Mono" = "mono", "Times New Roman" = "Times New Roman")),
-              numericInput("font_size", "Font Size for plot", value = 12, min = 8, max = 20),
-              textInput("output_filename", "Output Filename", value = "result"),
-              actionButton("analyze_button", "Analyze", class = "btn-success"),
-              strong("Downlod and save your results in document format by cliclking link below", align='center'),
-              downloadButton("download_report", "Download Report", class = "btn-info")
-            )
-          )
-    )
-  ),
-  layout_columns(
-    col_widths = c(12),
-    card(
-      card_header(
-        "Results",
-        class = "bg-primary text-white"
       ),
-      card_body(
-        tabsetPanel(
-          tabPanel("Data Preview", DT::DTOutput("preview")),
-          tabPanel("",
-                   uiOutput("analysis_outputs")
-          )
+      card( height = "auto",
+            card_header(
+              div( class="text-center",
+                   "Data Input and Analysis Options",
+                   height= "120px",
+                   class = "bg-primary text-white"
+              )),
+            card_body(
+              fluidRow(
+                fileInput("file", "Choose .xlsx or .csv", accept = c(".xlsx", ".csv")),
+                actionButton("clipboard_button","Use Clipboard Data", class = "text-black",
+                             style = "width: 700px; height:35px; float:center;margin-top: 30px;",
+                             title="Click here to paste your clipboard data"),
+                strong("Choose acccording to your need", align='center'),
+                selectInput("test_method", "Choose Post-Hoc Test",
+                            choices = c("LSD" = "LSD.test",
+                                        "Duncan" = "duncan.test",
+                                        "Tukey HSD" = "HSD.test",
+                                        "Student-Newman-Keuls" = "SNK.test")),
+                textInput("bar_color", "Bar Color (name or hex code)", value = "coral1"),
+                selectInput("font_family", "Font Style for plot",
+                            choices = c("Sans" = "sans", "Serif" = "serif", "Mono" = "mono", "Times New Roman" = "Times New Roman")),
+                numericInput("font_size", "Font Size for plot", value = 12, min = 8, max = 20),
+                textInput("output_filename", "Output Filename", value = "result"),
+                actionButton("analyze_button", "Analyze", class = "btn-success"),
+                strong("Downlod and save your results in document format by cliclking link below", align='center'),
+                downloadButton("download_report", "Download Report", class = "btn-info")
+              )
+            )
+      )
+    ),
+    layout_columns(
+      col_widths = c(12),
+      card(
+        card_header(
+          "Results",
+          class = "bg-primary text-white"
         ),
-        uiOutput("analysis_status")  # Add this line to display the analysis status
+        card_body(
+          tabsetPanel(
+            tabPanel("Data Preview", DT::DTOutput("preview")),
+            tabPanel("",
+                     uiOutput("analysis_outputs")
+            )
+          ),
+          uiOutput("analysis_status")  # Add this line to display the analysis status
+        )
       )
     )
   )
-)
 
 server <- function(input, output, session) {
   data <- reactiveVal(NULL)
@@ -151,7 +130,7 @@ server <- function(input, output, session) {
   observeEvent(input$clipboard_button, {
     clipboard_data <- read.delim("clipboard", header = TRUE)
     data(clipboard_data)
-  })
+    })
 
   output$preview <- DT::renderDT({
     req(data())

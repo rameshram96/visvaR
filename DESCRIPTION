@@ -18,16 +18,24 @@ Imports:
     agricolae,
     bslib,
     corrplot,
-    dplyr,
-    DT,
     flextable,
     ggcorrplot,
     ggplot2,
     officer,
-    openxlsx,
     patchwork,
-    readxl,
     shiny,
-    stats,
     tibble,
-    tidyr
+    tidyr,
+    rlang,
+    dplyr, 
+    DT,
+    readxl,
+    htmltools,
+    utils,
+    stats,
+    graphics,
+    grDevices
+
+    
+    
+

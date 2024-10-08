@@ -1,36 +1,25 @@
-#' @import shiny
 #' @import dplyr
 #' @import ggplot2
 #' @import agricolae
 #' @import bslib
 #' @import corrplot
-#' @import dplyr
-#' @import DT
 #' @import flextable
 #' @import ggcorrplot
-#' @import ggplot2
 #' @import officer
-#' @import openxlsx
-#' @import patchwork
-#' @import stats
-#' @import tibble
-#' @import tidyr
-#' @import agricolae
-#' @import bslib
-#' @import corrplot
-#' @importFrom dplyr select mutate group_by summarize
-#' @importFrom DT datatable
-#' @import flextable
-#' @import ggcorrplot
-#' @import ggplot2
-#' @importFrom officer add_slide
-#' @import openxlsx
 #' @import patchwork
 #' @import tibble
 #' @import tidyr
+#' @importFrom rlang .data
+#' @importFrom ggplot2 aes
+#' @importFrom shiny h1 div fluidRow fileInput actionButton strong selectInput textInput numericInput downloadButton tabsetPanel tabPanel uiOutput reactiveVal renderUI observeEvent req showNotification renderPrint renderPlot tagList h3 verbatimTextOutput plotOutput hr removeNotification downloadHandler
+#' @importFrom stats aov anova fitted resid sd deviance
+#' @importFrom grDevices png dev.off
+#' @importFrom graphics par
+#' @importFrom shiny tags shinyApp
 NULL
+utils::globalVariables(c("Fitted", "Residuals",'read_excel', "Sample", "Factor_A", "Response", "avg_AB", "se","Factor_B","LSD_AB$groups","response",'rownames(LSD_AB$groups)'))
 twoway_rbd<-function(){
-ui <- page_fluid(
+  ui <- page_fluid(
   theme = bs_theme(
     version = 5,
     bootswatch = "simplex",
@@ -65,19 +54,6 @@ ui <- page_fluid(
       <span>ramesh.rahu96@gmail.com</span>
     </p>
   "),
-addResourcePath("resources", system.file("www", package = "visvaR")),
-card_image(src = system.file(src = "resources/visvaRlogo.png",),
-                     style = "display: block; margin-left: auto; margin-right: auto;",
-                     alt = "",
-                     href = NULL,
-                     border_radius = c("auto"),
-                     mime_type = NULL,
-                     class = NULL,
-                     height ="50%",
-                     fill = FALSE,
-                     width = "50%",
-                     container = NULL
-          )
     ),
     card( height = "auto",
           card_header(
@@ -119,7 +95,7 @@ card_image(src = system.file(src = "resources/visvaRlogo.png",),
       card_body(
         tabsetPanel(
           tabPanel("Data Preview", DT::DTOutput("preview")),
-          tabPanel("",
+          tabPanel("OUTPUT",
                    uiOutput("analysis_outputs")
           )
         ),
@@ -251,7 +227,7 @@ server <- function(input, output, session) {
         labs(color = NULL)
 
 
-#Word document content
+      #Word document content
       aov_df <- data.frame(Source = rownames(aov_result), aov_result)
       aov_df[, "Significance"] <- ifelse(aov_df$Pr..F. <= 0.001, "***",
                                          ifelse(aov_df$Pr..F. <= 0.01, "**",
@@ -320,7 +296,7 @@ server <- function(input, output, session) {
       doc <- body_add_gg(doc, combined_plot, width = 4, height = 4)
       doc<-body_add_break(doc,pos = "after")
 
-#dynamic UI outputs
+      #dynamic UI outputs
       output[[paste0("analysis_output_", i)]] <- DT::renderDT({
         print(aov_result)
       })
@@ -341,7 +317,7 @@ server <- function(input, output, session) {
     # Store the generated document in the reactive value
     report(doc)
 
-# UI with dynamic outputs
+    # UI with dynamic outputs
     output$analysis_outputs <- renderUI({
       lapply(seq_along(response_cols), function(i) {
         tagList(
@@ -356,7 +332,7 @@ server <- function(input, output, session) {
 
     analysis_complete(TRUE)
 
-#Remove the "in progress" notification and show a completion notification
+    #Remove the "in progress" notification and show a completion notification
     removeNotification(id = "analysis_notification")
     showNotification("Analysis complete!", type = "message", duration = 30)
   })
