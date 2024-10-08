@@ -32,7 +32,6 @@
 #' @importFrom grDevices png dev.off
 NULL
 correlation_multi<-function(){
-  # UI definition
   ui <- shiny::fluidPage(
     theme = bslib::bs_theme(
       version = 5,
