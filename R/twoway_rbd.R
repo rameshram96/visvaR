@@ -261,7 +261,7 @@ server <- function(input, output, session) {
           ftext("Developed by Ramesh R PhD scholar, Division of Plant Physiology, ICAR-IARI, New Delhi", fp_bold))
       )
       a_par <- fpar(
-        "visvaR - Visualize  Variance                                                                                         ",
+        "visvaR - Visualize Variance                                                                                         ",
         run_footnote(x = bl, prop = fp_refnote),
         "")
 

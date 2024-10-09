@@ -1,4 +1,4 @@
-# visvaR <img src="man/figures/visvaR_logo.png" align="right" height="200"/>
+# visvaR - Visualize Variance <img src="man/figures/visvaR_logo.png" align="right" height="200"/>
 
 It is a user friendly tool to do the statistical analysis of agricultural research data like ANOVA, correlation etc.. (The pacakge is in the developmental stage, we strongley encorage feeback from the users to improve the pacakge)
  Package developed by 
@@ -7,8 +7,8 @@ It is a user friendly tool to do the statistical analysis of agricultural resear
  Division of Plant Physiology
  ICAR-IARI, New Delhi
  ramesh.rahu96@gmail.com
- ## Installation
-
+ 
+## Installation
 You can install the development version of plantphysioR from [GitHub](https://github.com/rameshram96/visvaR) with:
 
 ``` r

@@ -92,6 +92,18 @@ correlation_multi<-function(){
           <span>ramesh.rahu96@gmail.com</span>
         </p>
         "),
+                                      card_image(src= "man/figures/visvaR_logo.png",
+                                       style = "display: block; margin-left: auto; margin-right: auto;",
+                                       alt = "",
+                                       href = NULL,
+                                       border_radius = c("auto"),
+                                       mime_type = NULL,
+                                       class = NULL,
+                                       height ="30%",
+                                       fill = FALSE,
+                                       width = "30%",
+                                       container = NULL
+                            )
                           )
             )
           ),
@@ -213,7 +225,7 @@ correlation_multi<-function(){
             officer::ftext("Developed by Ramesh R PhD scholar, Division of Plant Physiology, ICAR-IARI, New Delhi", fp_bold))
         )
         a_par <- officer::fpar(
-          "visvaR- Visulaize Variance                                           ",
+          "visvaR- Visualize Variance                                           ",
           officer::run_footnote(x = bl, prop = fp_refnote),
           ""
         )
