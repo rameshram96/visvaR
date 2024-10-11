@@ -68,13 +68,13 @@ correlation_multi<-function(){
                            choices = c("RdYlBu", "RdBu", "PuOr", "PRGn", "BrBG", "PiYG")),
         shiny::numericInput("plot_width", "Plot Width (inches):", value = 10, min = 1, max = 20),
         shiny::numericInput("plot_height", "Plot Height (inches):", value = 8, min = 1, max = 20),
-        shiny::numericInput("plot_dpi", "Plot DPI:", value = 300, min = 72, max = 600),
+        shiny::numericInput("plot_dpi", "Plot Resolution(dpi):", value = 300, min = 72, max = 600),
         shiny::downloadButton("download_plot", "Download Plot",class = "btn-info"),
         shiny::downloadButton("download_word", "Download Word Report",class = "btn-info"),
         shiny::fluidPage(
           shiny::fluidRow(
             shiny::column(9, offset = 1,
-                          bslib::card(
+                          bslib::card(uiOutput("logo"),
                             height = "auto",
                             bslib::card_header(
                               shiny::div(
@@ -91,19 +91,7 @@ correlation_multi<-function(){
           <span>Division of Plant Physiology </span><br> ICAR-IARI, New Delhi</span><br>
           <span>ramesh.rahu96@gmail.com</span>
         </p>
-        "),
-                                      card_image(src= "man/figures/visvaR_logo.png",
-                                       style = "display: block; margin-left: auto; margin-right: auto;",
-                                       alt = "",
-                                       href = NULL,
-                                       border_radius = c("auto"),
-                                       mime_type = NULL,
-                                       class = NULL,
-                                       height ="30%",
-                                       fill = FALSE,
-                                       width = "30%",
-                                       container = NULL
-                            )
+        ")
                           )
             )
           ),
@@ -122,7 +110,12 @@ correlation_multi<-function(){
 
   # Define server logic
   server <- function(input, output, session) {
+    output$logo <- renderUI({
+      img_path <- system.file("~/visvaR/inst/www", "hex_visvaR.png", package = "visvaR")
 
+      # Create an image tag
+      tags$img(src = img_path, alt = "logo", style = "max-width:50%; height: auto;")
+    })
     data <- shiny::reactiveVal(NULL)
     correlation_matrix <- shiny::reactiveVal(NULL)
     original_names <- shiny::reactiveVal(NULL)
