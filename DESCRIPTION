@@ -1,7 +1,7 @@
 Package: visvaR
 Title: Shiny-Based Statistical Solutions for Agricultural Research
 Version: 1.0.0
-Authors@R:c(
+Authors@R: c(
     person("Ramesh", "Ramasamy", , "ramesh.rahu96@gmail.com", role = c("aut", "cre","cph"),
            comment = c(ORCID = "0000-0002-5433-1417")),
     person("Mathiyarasi", "Kulandaivadivel", , "mathiarasi6@gmail.com", role = "ctb"),
@@ -35,7 +35,3 @@ Imports:
     stats,
     graphics,
     grDevices
-
-    
-    
-
