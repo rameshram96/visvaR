@@ -10,6 +10,8 @@ You can install the development version of visvaR from [GitHub](https://github.c
 # install.packages("devtools")
 devtools::install_github("rameshram96/visvaR")
 ```
+
 <!-- badges: start -->
-  [![R-CMD-check](https://github.com/rameshram96/visvaR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rameshram96/visvaR/actions/workflows/R-CMD-check.yaml)
-  <!-- badges: end -->
+
+[![R-CMD-check](https://github.com/rameshram96/visvaR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rameshram96/visvaR/actions/workflows/R-CMD-check.yaml) 
+<!-- badges: end -->
