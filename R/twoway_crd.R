@@ -53,7 +53,7 @@ twoway_crd<-function(){
     "))
     ),
     h1("Two-Way Completely Randomized Design (CRD)",
-       style = "font-family:Times New Roman; font-weight: bold; font-size: 36px; color: #4CAF50;"),
+       style = "font-family:Times New Roman; font-weight: bold; font-size: 36px; color: #890304;"),
     layout_columns(
       col_widths = c(3, 9),
       card( height = "45",
@@ -273,7 +273,7 @@ twoway_crd<-function(){
 
         ft <- flextable(aov_df)
         ft <- set_caption(ft, caption = paste("ANOVA Results -", response_col))
-        ft <- add_footer_lines(ft, values = "Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1")
+        ft <- add_footer_lines(ft, values = "Signif. codes: 0.001='***', 0.01='**',0.05='*',0.1='.'")
         ft <- set_table_properties(ft, width = 0.9, layout = "autofit")
 
         ascend_AB_clean <- ascend_AB %>%

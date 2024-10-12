@@ -11,7 +11,21 @@ You can install the development version of visvaR from [GitHub](https://github.c
 devtools::install_github("rameshram96/visvaR")
 ```
 
+\##*Example usage*
+
+``` r
+library(visvaR)
+visvaR:::oneway_crd()        # one factor completely randomized design 
+visvaR:::oneway_rbd()        # one factor randomized block design 
+visvaR:::twoway_crd()        # two factor completely randomized design 
+visvaR:::twoway_rbd()        # two factor randomized block design 
+visvaR:::correlation_multi() # Correlation of multiple variables 
+```
+
+Running any of this code will open a application in your browser, where you can paste or import your data, after analysing the data you can download the results as a word file.
+
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/rameshram96/visvaR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rameshram96/visvaR/actions/workflows/R-CMD-check.yaml) 
+[![R-CMD-check](https://github.com/rameshram96/visvaR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rameshram96/visvaR/actions/workflows/R-CMD-check.yaml)
+
 <!-- badges: end -->
