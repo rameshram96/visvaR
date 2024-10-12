@@ -128,7 +128,7 @@ oneway_rbd<-function(){
   )
 
   server <- function(input, output, session) {
-    data <- reactiveVal(NULL)
+    data_reactive <- reactiveVal(NULL)
     report <- reactiveVal(NULL)
     analysis_complete <- reactiveVal(FALSE)  # Add this line
     # Add this to create the analysis status UI
@@ -142,21 +142,21 @@ oneway_rbd<-function(){
     })
     observeEvent(input$file, {
       req(input$file)
-      data(read_excel(input$file$datapath))
+      data_reactive(read_excel(input$file$datapath))
     })
 
     observeEvent(input$clipboard_button, {
       clipboard_data <- read.delim("clipboard", header = TRUE)
-      data(clipboard_data)
+      data_reactive(clipboard_data)
     })
 
     output$preview <- DT::renderDT({
-      req(data())
-      data()
+      req(data_reactive())
+      data_reactive()
     })
 
     observeEvent(input$analyze_button, {
-      req(data())
+      req(data_reactive())
 
       # Reset the analysis_complete status
       analysis_complete(FALSE)
@@ -164,7 +164,7 @@ oneway_rbd<-function(){
       # Show a notification that analysis has started
       showNotification("Analysis in progress...", type = "message", duration = NULL, id = "analysis_notification")
 
-      data_full <- data()
+      data_full <- data_reactive()
       factor_col <- colnames(data_full)[1]
       rep_col <- colnames(data_full)[2]
       response_cols <- colnames(data_full)[3:ncol(data_full)]

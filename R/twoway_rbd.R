@@ -125,7 +125,7 @@ twoway_rbd<-function(){
 )
 
 server <- function(input, output, session) {
-  data <- reactiveVal(NULL)
+  data_reactive <- reactiveVal(NULL)
   report <- reactiveVal(NULL)
   analysis_complete <- reactiveVal(FALSE)
   #create the analysis status UI
@@ -139,28 +139,28 @@ server <- function(input, output, session) {
   })
   observeEvent(input$file, {
     req(input$file)
-    data(read_excel(input$file$datapath))
+    data_reactive(read_excel(input$file$datapath))
   })
 
   observeEvent(input$clipboard_button, {
     clipboard_data <- read.delim("clipboard", header = TRUE)
-    data(clipboard_data)
+    data_reactive(clipboard_data)
   })
 
   output$preview <- DT::renderDT({
-    req(data())
-    data()
+    req(data_reactive())
+    data_reactive()
   })
 
   observeEvent(input$analyze_button, {
-    req(data())
+    req(data_reactive())
 
 
     analysis_complete(FALSE)
 
     showNotification("Analysis in progress...", type = "message", duration = NULL, id = "analysis_notification")
 
-    data_full <- data()
+    data_full <- data_reactive()
     factor_a <- colnames(data_full)[1]
     factor_b <- colnames(data_full)[2]
     rep_col <- colnames(data_full)[3]

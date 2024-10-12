@@ -110,20 +110,22 @@ correlation_multi<-function(){
 
   # Define server logic
   server <- function(input, output, session) {
+
     output$logo <- renderUI({
       img_path <- system.file("~/visvaR/inst/www", "hex_visvaR.png", package = "visvaR")
-
-      # Create an image tag
       tags$img(src = img_path, alt = "logo", style = "max-width:50%; height: auto;")
     })
-    data <- shiny::reactiveVal(NULL)
+
+    # Define reactive values to hold data
+    data_reactive <- shiny::reactiveVal(NULL)  # Holds the dataset locally in reactive value
     correlation_matrix <- shiny::reactiveVal(NULL)
     original_names <- shiny::reactiveVal(NULL)
 
+    # Observe event for clipboard input
     shiny::observeEvent(input$clipboard_input, {
       tryCatch({
         df <- read.delim("clipboard", header = TRUE, check.names = FALSE)
-        data(df)  # This sets the reactive value
+        data_reactive(df)  # Store the dataframe in the reactive value
         original_names(colnames(df))
         shiny::showNotification("Data successfully read from clipboard", type = "message")
       }, error = function(e) {
@@ -131,6 +133,7 @@ correlation_multi<-function(){
       })
     })
 
+    # Observe event for file input
     shiny::observeEvent(input$file, {
       shiny::req(input$file)
       ext <- tools::file_ext(input$file$name)
@@ -143,7 +146,7 @@ correlation_multi<-function(){
         } else {
           stop("Unsupported file format")
         }
-        data(df)  # This sets the reactive value
+        data_reactive(df)  # Store the dataframe in the reactive value
         original_names(colnames(df))
         shiny::showNotification("File successfully uploaded", type = "message")
       }, error = function(e) {
@@ -151,22 +154,25 @@ correlation_multi<-function(){
       })
     })
 
+    # Render data table
     output$data_preview <- DT::renderDT({
-      shiny::req(data())
-      DT::datatable(data(), options = list(scrollX = TRUE, scrollY = "400px", pageLength = 15))
+      shiny::req(data_reactive())  # Access data from reactive value
+      DT::datatable(data_reactive(), options = list(scrollX = TRUE, scrollY = "400px", pageLength = 15))
     })
 
+    # Analyze data for correlation matrix
     shiny::observeEvent(input$analyze, {
-      shiny::req(data())
-      M <- cor(data(),method = input$method)
-      correlation_matrix(M)
+      shiny::req(data_reactive())
+      M <- cor(data_reactive(), method = input$method)  # Perform correlation on reactive data
+      correlation_matrix(M)  # Store correlation matrix in reactive value
     })
 
+    # Create the correlation plot
     create_correlation_plot <- function() {
       shiny::req(correlation_matrix())
 
       M <- correlation_matrix()
-      res1 <- corrplot::cor.mtest(data(), conf.level = 0.95)
+      res1 <- corrplot::cor.mtest(data_reactive(), conf.level = 0.95)
 
       par(mfrow = c(1, 1), mar = c(5, 4, 4, 2) + 0.1, family = input$font_family)
 
@@ -181,10 +187,12 @@ correlation_multi<-function(){
                          tl.pos = "n", cl.pos = "n", tl.cex = input$font_size / 12, tl.srt = 45)
     }
 
+    # Render the correlation plot
     output$correlation_plot <- shiny::renderPlot({
       create_correlation_plot()
     })
 
+    # Render the correlation matrix
     output$correlation_matrix <- DT::renderDT({
       shiny::req(correlation_matrix())
       matrix_with_names <- correlation_matrix()
@@ -193,6 +201,7 @@ correlation_multi<-function(){
       DT::datatable(round(matrix_with_names, 2), options = list(scrollX = TRUE, scrollY = "400px"))
     })
 
+    # Download the correlation plot
     output$download_plot <- shiny::downloadHandler(
       filename = function() {
         paste("correlation_plot_", Sys.Date(), ".png", sep = "")
@@ -204,6 +213,7 @@ correlation_multi<-function(){
       }
     )
 
+    # Download the Word report
     output$download_word <- shiny::downloadHandler(
       filename = function() {
         paste("correlation_analysis_report_", Sys.Date(), ".docx", sep = "")
@@ -214,8 +224,7 @@ correlation_multi<-function(){
         fp_refnote <- officer::fp_text_lite(vertical.align = "baseline")
         bl <- officer::block_list(
           officer::fpar(officer::ftext("Analysis done using visvaR R package ", fp_bold)),
-          officer::fpar(
-            officer::ftext("Developed by Ramesh R PhD scholar, Division of Plant Physiology, ICAR-IARI, New Delhi", fp_bold))
+          officer::fpar(officer::ftext("Developed by Ramesh R PhD scholar, Division of Plant Physiology, ICAR-IARI, New Delhi", fp_bold))
         )
         a_par <- officer::fpar(
           "visvaR- Visualize Variance                                           ",
@@ -230,9 +239,11 @@ correlation_multi<-function(){
           font.color = "#333333",
           table.layout = "autofit",
           border.color = "black")
+
         # Add title
         doc <- doc %>%
           officer::body_add_par("Correlation Analysis Report", style = "heading 1")
+
         # Add correlation plot
         temp_plot <- tempfile(fileext = ".png")
         png(temp_plot, width = input$plot_width, height = input$plot_height, units = "in", res = input$plot_dpi)
@@ -252,7 +263,7 @@ correlation_multi<-function(){
         rownames(matrix_with_names) <- original_names()
         matrix_table <- flextable::flextable(round(as.data.frame(matrix_with_names), 2))
         matrix_table <- flextable::autofit(matrix_table)
-        matrix_table <- flextable::add_footer_lines(matrix_table,paste("Method used:", input$method))
+        matrix_table <- flextable::add_footer_lines(matrix_table, paste("Method used:", input$method))
         doc <- doc %>%
           body_add_flextable(matrix_table)
 
