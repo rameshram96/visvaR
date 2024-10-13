@@ -12,7 +12,7 @@ License: AGPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
-URL: https://github.com/rameshram96/visvaR
+URL: https://github.com/rameshram96/visvaR, https://rameshram96.github.io/visvaR/
 BugReports: https://github.com/rameshram96/visvaR/issues
 Imports: 
     agricolae,
