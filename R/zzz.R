@@ -1,5 +1,5 @@
 .onAttach <- function(libname, pkgname) {
   packageStartupMessage("Thank you for installing 'visvaR'!")
   packageStartupMessage("For help, type: ?visvaR")
-  packageStartupMessage("For help or support, contact Ramesh Ramasamy at ramesh.rahu96@gmail.com")
+  packageStartupMessage(" For more information visit: https://rameshram96.github.io/visvaR/")
 }
