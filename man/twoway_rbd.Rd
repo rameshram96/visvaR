@@ -19,6 +19,11 @@ and user can select the post-hoc test method and download the report which conta
 This Shiny app is part of the \code{visvaR} package and is designed for
 analysis of variance randomized block design (two factor) and user can download the report in word format.
 }
+\references{
+Fisher, R. A. (1925). Statistical Methods for Research Workers. Oliver and Boyd, Edinburgh.
+Scheffe, H. (1959). The Analysis of Variance. John Wiley & Sons, New York.
+R Core Team (2024). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/
+}
 \author{
 Ramesh Ramasamy
 

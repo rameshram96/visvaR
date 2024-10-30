@@ -20,6 +20,49 @@ This Shiny app is part of the \code{visvaR} package and is designed for
 correlation analysis and user can download the report in word format also has
 option to download the correlation plot as .png file
 }
+\examples{
+\dontrun{
+# Example 1: Basic usage
+if(interactive()) {
+  correlation_multi()
+}
+
+# Example 2: Sample workflow with iris dataset
+if(interactive()) {
+  # Prepare sample data
+  write.csv(iris[, 1:4], "sample_data.csv", row.names = FALSE)
+
+  # Launch the app
+  correlation_multi()
+
+  # Instructions for users:
+  # 1. Click "Choose a file" and select sample_data.csv
+  # 2. Select correlation method (e.g., "pearson")
+  # 3. Click "Analyze"
+  # 4. View results in different tabs
+  # 5. Download plot or Word report as needed
+
+  # Clean up
+  unlink("sample_data.csv")
+}
+
+# Example 3: Using clipboard data
+if(interactive()) {
+  # Copy this to clipboard:
+  # Var1,Var2,Var3
+  # 1,2,3
+  # 4,5,6
+  # 7,8,9
+
+  correlation_multi()
+  # Click "Paste from Clipboard" after copying data
+}
+}
+}
+\references{
+Wei, T., & Simko, V. (2021). R package 'corrplot': Visualization of a Correlation Matrix (Version 0.92). Available from https://CRAN.R-project.org/package=corrplot.
+Friendly, M. (2002). Corrgrams: Exploratory displays for correlation matrices. The American Statistician, 56(4), 316-324.
+}
 \author{
 Ramesh Ramasamy
 

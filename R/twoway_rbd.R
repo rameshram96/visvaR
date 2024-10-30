@@ -11,7 +11,9 @@
 #' This function runs a local instance of the Shiny app in your default web
 #' browser. The app interface allows users to upload data, select analysis
 #' method, and download outputs.
-#'
+#' @references Fisher, R. A. (1925). Statistical Methods for Research Workers. Oliver and Boyd, Edinburgh.
+#'             Scheffe, H. (1959). The Analysis of Variance. John Wiley & Sons, New York.
+#'             R Core Team (2024). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/
 #' @usage twoway_rbd()
 #' @name twoway_rbd
 #' @author Ramesh Ramasamy
@@ -128,7 +130,9 @@ server <- function(input, output, session) {
   data_reactive <- reactiveVal(NULL)
   report <- reactiveVal(NULL)
   analysis_complete <- reactiveVal(FALSE)
-  #create the analysis status UI
+  session$onSessionEnded(function() {
+    shiny::stopApp()
+  })
   output$analysis_status <- renderUI({
     if (analysis_complete()) {
       div( class="text-center",
@@ -244,7 +248,8 @@ server <- function(input, output, session) {
         expand_limits(y = c(0, max(MeanSE_AB$avg_AB+ (MeanSE_AB$avg_AB*0.25))))+
         guides(fill=guide_legend(title=factor_b))+
         labs(color = NULL)
-
+      oldpar <- par(no.readonly = TRUE)
+      on.exit(par(oldpar))
 
       #Word document content
       aov_df <- data.frame(Source = rownames(aov_result), aov_result)

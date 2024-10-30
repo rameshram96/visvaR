@@ -6,13 +6,130 @@
 #' @details
 #' This Shiny app is part of the `visvaR` package and is designed for
 #' analysis of variance on data from completely randomized design (two factor) and user can download the report in word format.
-#'
+#' The analysis of variance was performed using R's aov() function (Chambers & Hastie, 1992; R Core Team, 2024), which implements the classical ANOVA methodology developed by Fisher (1925).
 #' @return
 #' This function runs a local instance of the Shiny app in your default web
 #' browser. The app interface allows users to upload data, select analysis
 #' method, and download outputs.
 #'
 #' @usage twoway_crd()
+#' @examples
+#' \dontrun{
+#' # Example 1: Basic usage
+#' if(interactive()) {
+#'   twoway_crd()
+#' }
+#'
+#' # Example 2: Sample workflow with factorial fertilizer experiment
+#' if(interactive()) {
+#'   # Prepare sample data with two factors: Nitrogen and Phosphorus levels
+#'   fertilizer_data <- data.frame(
+#'     Nitrogen = rep(c("N0", "N30", "N60"), each = 12),
+#'     Phosphorus = rep(rep(c("P0", "P30", "P60", "P90"), each = 3), times = 3),
+#'     Replication = rep(1:3, times = 12),
+#'     Grain_Yield = c(
+#'       4.2, 4.0, 4.1,  # N0-P0
+#'       4.8, 4.6, 4.7,  # N0-P30
+#'       5.1, 5.0, 5.2,  # N0-P60
+#'       5.0, 4.9, 5.1,  # N0-P90
+#'       5.5, 5.3, 5.4,  # N30-P0
+#'       6.2, 6.0, 6.1,  # N30-P30
+#'       6.8, 6.6, 6.7,  # N30-P60
+#'       6.7, 6.5, 6.6,  # N30-P90
+#'       6.0, 5.8, 5.9,  # N60-P0
+#'       6.8, 6.6, 6.7,  # N60-P30
+#'       7.5, 7.3, 7.4,  # N60-P60
+#'       7.4, 7.2, 7.3   # N60-P90
+#'     ),
+#'     Protein_Content = c(
+#'       9.0, 8.8, 8.9,   # N0-P0
+#'       9.5, 9.3, 9.4,   # N0-P30
+#'       9.8, 9.6, 9.7,   # N0-P60
+#'       9.7, 9.5, 9.6,   # N0-P90
+#'       10.5, 10.3, 10.4, # N30-P0
+#'       11.2, 11.0, 11.1, # N30-P30
+#'       11.8, 11.6, 11.7, # N30-P60
+#'       11.7, 11.5, 11.6, # N30-P90
+#'       12.0, 11.8, 11.9, # N60-P0
+#'       12.8, 12.6, 12.7, # N60-P30
+#'       13.5, 13.3, 13.4, # N60-P60
+#'       13.4, 13.2, 13.3  # N60-P90
+#'     )
+#'   )
+#'
+#'   # Save as Excel file
+#'   write.xlsx(fertilizer_data, "fertilizer_data.xlsx")
+#'
+#'   # Launch the app
+#'   twoway_crd()
+#'
+#'   # Instructions for users:
+#'   # 1. Click "Choose .xlsx or .csv" and select fertilizer_data.xlsx
+#'   # 2. Select post-hoc test method (e.g., "LSD" or "Tukey HSD")
+#'   # 3. Customize plot appearance:
+#'   #    - Select font style
+#'   #    - Adjust font size
+#'   # 4. Set output filename
+#'   # 5. Click "Analyze"
+#'   # 6. View results in different tabs
+#'   # 7. Download comprehensive Word report
+#'
+#'   # Clean up
+#'   unlink("fertilizer_data.xlsx")
+#' }
+#'
+#' # Example 3: Using clipboard data
+#' if(interactive()) {
+#'   # Copy this to clipboard:
+#'   # Temperature,Light,Replication,Growth_Rate,Chlorophyll
+#'   # Low,Dark,1,2.1,15.2
+#'   # Low,Dark,2,2.0,15.0
+#'   # Low,Dark,3,2.2,15.1
+#'   # Low,Medium,1,2.8,16.5
+#'   # Low,Medium,2,2.7,16.3
+#'   # Low,Medium,3,2.9,16.4
+#'   # Low,High,1,3.2,17.8
+#'   # Low,High,2,3.1,17.6
+#'   # Low,High,3,3.3,17.7
+#'   # High,Dark,1,2.5,14.8
+#'   # High,Dark,2,2.4,14.6
+#'   # High,Dark,3,2.6,14.7
+#'   # High,Medium,1,3.5,16.2
+#'   # High,Medium,2,3.4,16.0
+#'   # High,Medium,3,3.6,16.1
+#'   # High,High,1,4.2,17.5
+#'   # High,High,2,4.1,17.3
+#'   # High,High,3,4.3,17.4
+#'
+#'   twoway_crd()
+#'   # Click "Use Clipboard Data" after copying data
+#' }
+#'
+#' # Example 4: Multiple response variables with variety trial
+#' if(interactive()) {
+#'   # Create data with multiple responses
+#'   variety_trial <- data.frame(
+#'     Irrigation = rep(c("Full", "Deficit"), each = 18),
+#'     Variety = rep(rep(c("V1", "V2", "V3"), each = 6), times = 2),
+#'     Replication = rep(1:6, times = 6),
+#'     Yield = rnorm(36, mean = rep(c(5.5, 5.0, 4.8, 4.2, 3.8, 3.5), each = 6), sd = 0.2),
+#'     WUE = rnorm(36, mean = rep(c(2.2, 2.4, 2.3, 2.8, 3.0, 2.9), each = 6), sd = 0.1),
+#'     Biomass = rnorm(36, mean = rep(c(12.5, 11.8, 11.2, 10.2, 9.8, 9.5), each = 6), sd = 0.5)
+#'   )
+#'
+#'   # Save as Excel file
+#'   write.xlsx(variety_trial, "variety_trial.xlsx")
+#'
+#'   # Launch the app
+#'   twoway_crd()
+#'
+#'   # Clean up
+#'   unlink("variety_trial.xlsx")
+#' }
+#' }
+#' @references Fisher, R. A. (1925). Statistical Methods for Research Workers. Oliver and Boyd, Edinburgh.
+#'             Scheffe, H. (1959). The Analysis of Variance. John Wiley & Sons, New York.
+#'             R Core Team (2024). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/
 #' @name twoway_crd
 #' @author Ramesh Ramasamy
 #' @author Mathiyarsai Kulandaivadivel
@@ -128,7 +245,9 @@ twoway_crd<-function(){
     data_reactive <- reactiveVal(NULL)
     report <- reactiveVal(NULL)
     analysis_complete <- reactiveVal(FALSE)
-    #create the analysis status UI
+    session$onSessionEnded(function() {
+      shiny::stopApp()
+    })
     output$analysis_status <- renderUI({
       if (analysis_complete()) {
         div( class="text-center",
@@ -242,7 +361,8 @@ twoway_crd<-function(){
           expand_limits(y = c(0, max(MeanSE_AB$avg_AB+ (MeanSE_AB$avg_AB*0.25))))+
           guides(fill=guide_legend(title=factor_b))+
           labs(color = NULL)
-
+        oldpar <- par(no.readonly = TRUE)
+        on.exit(par(oldpar))
 
         #Word document content
         aov_df <- data.frame(Source = rownames(aov_result), aov_result)

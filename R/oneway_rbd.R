@@ -6,13 +6,96 @@
 #' @details
 #' This Shiny app is part of the `visvaR` package and is designed for
 #' analysis of variance on data from randomized block design (one factor) and user can download the report in word format.
-#'
+#' The analysis of variance was performed using R's aov() function (Chambers & Hastie, 1992; R Core Team, 2024), which implements the classical ANOVA methodology developed by Fisher (1925).
 #' @return
 #' This function runs a local instance of the Shiny app in your default web
 #' browser. The app interface allows users to upload data, select analysis
 #' method, and download outputs.
 #'
 #' @usage oneway_rbd()
+#' @examples
+#' \dontrun{
+#' # Example 1: Basic usage
+#' if(interactive()) {
+#'   oneway_rbd()
+#' }
+#'
+#' # Example 2: Sample workflow with plant growth experiment
+#' if(interactive()) {
+#'   # Prepare sample data
+#'   plant_data <- data.frame(
+#'     Treatment = rep(c("Control", "Low", "Medium", "High"), each = 3),
+#'     Replication = rep(1:3, times = 4),
+#'     Plant_Height = c(25.3, 24.8, 25.1,  # Control
+#'                      27.6, 28.1, 27.9,  # Low
+#'                      30.2, 29.8, 30.5,  # Medium
+#'                      26.8, 27.2, 26.5), # High
+#'     Leaf_Count = c(8, 7, 8,    # Control
+#'                    10, 11, 10,  # Low
+#'                    12, 13, 12,  # Medium
+#'                    9, 8, 9)     # High
+#'   )
+#'
+#'   # Save as Excel file
+#'   write.xlsx(plant_data, "plant_data.xlsx")
+#'
+#'   # Launch the app
+#'   oneway_rbd()
+#'
+#'   # Instructions for users:
+#'   # 1. Click "Choose .xlsx or .csv" and select plant_data.xlsx
+#'   # 2. Select post-hoc test method (e.g., "Tukey HSD")
+#'   # 3. Customize plot appearance if desired:
+#'   #    - Choose bar color
+#'   #    - Select font style
+#'   #    - Adjust font size
+#'   # 4. Click "Analyze"
+#'   # 5. View results in different tabs
+#'   # 6. Download Word report
+#'
+#'   # Clean up
+#'   unlink("plant_data.xlsx")
+#' }
+#'
+#' # Example 3: Using clipboard data
+#' if(interactive()) {
+#'   # Copy this to clipboard:
+#'   # Treatment,Replication,Yield
+#'   # Control,1,45.2
+#'   # Control,2,44.8
+#'   # Control,3,45.5
+#'   # Treatment1,1,48.6
+#'   # Treatment1,2,49.2
+#'   # Treatment1,3,48.9
+#'   # Treatment2,1,52.3
+#'   # Treatment2,2,51.8
+#'   # Treatment2,3,52.7
+#'
+#'   oneway_rbd()
+#'   # Click "Use Clipboard Data" after copying data
+#' }
+#'
+#' # Example 4: Multiple response variables
+#' if(interactive()) {
+#'   # Create data with multiple responses
+#'   multi_response_data <- data.frame(
+#'     Treatment = rep(c("Control", "Treatment1", "Treatment2"), each = 4),
+#'     Replication = rep(1:4, times = 3),
+#'     Height = rnorm(12, mean = c(rep(20,4), rep(25,4), rep(30,4)), sd = 2),
+#'     Weight = rnorm(12, mean = c(rep(50,4), rep(60,4), rep(70,4)), sd = 5),
+#'     Length = rnorm(12, mean = c(rep(10,4), rep(12,4), rep(15,4)), sd = 1)
+#'   )
+#'
+#'   # Save as Excel file
+#'   write.xlsx(multi_response_data, "multi_response.xlsx")
+#'
+#'   # Launch the app
+#'   oneway_rbd()
+#'   }
+#'   }
+#' @references Fisher, R. A. (1925). Statistical Methods for Research Workers. Oliver and Boyd, Edinburgh.
+#'             Scheffe, H. (1959). The Analysis of Variance. John Wiley & Sons, New York.
+#'             R Core Team (2024). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/
 #' @name oneway_rbd
 #' @author Ramesh Ramasamy
 #' @author Mathiyarsai Kulandaivadivel
@@ -130,8 +213,10 @@ oneway_rbd<-function(){
   server <- function(input, output, session) {
     data_reactive <- reactiveVal(NULL)
     report <- reactiveVal(NULL)
-    analysis_complete <- reactiveVal(FALSE)  # Add this line
-    # Add this to create the analysis status UI
+    analysis_complete <- reactiveVal(FALSE)
+    session$onSessionEnded(function() {
+      shiny::stopApp()
+    })
     output$analysis_status <- renderUI({
       if (analysis_complete()) {
         div( class="text-center",
@@ -241,8 +326,8 @@ oneway_rbd<-function(){
           scale_y_continuous(expand = c(0,0))+
           expand_limits(y = c(0, max(MeanSE_A$avg_A+ (MeanSE_A$avg_A*0.25))))+
           labs(color = NULL)
-
-
+      oldpar <- par(no.readonly = TRUE)
+      on.exit(par(oldpar))
         # Generate Word document content
         aov_df <- data.frame(Source = rownames(aov_result), aov_result)
         aov_df[, "Significance"] <- ifelse(aov_df$Pr..F. <= 0.001, "***",

@@ -7,7 +7,7 @@ Authors@R: c(
     person("Mathiyarasi", "Kulandaivadivel", , "mathiarasi6@gmail.com", role = "ctb"),
     person("Tamilselvan", "Arumugam", , "tamilselvan372511@gmail.com", role ="ctb")
     )
-Description: Visualize Variance is an intuitive Shiny applications tailored for agricultural research data analysis, including one-way and two-way analysis of variance, correlation, and other essential statistical tools. Users can easily upload their datasets, perform analyses, and download the results as a well-formatted Word document, streamlining the process of data analysis and reporting in agricultural research.
+Description: Visualize Variance is an intuitive 'shiny' applications tailored for agricultural research data analysis, including one-way and two-way analysis of variance, correlation, and other essential statistical tools. Users can easily upload their datasets, perform analyses, and download the results as a well-formatted document, streamlining the process of data analysis and reporting in agricultural research.
 License: AGPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -35,3 +35,8 @@ Imports:
     stats,
     graphics,
     grDevices
+Suggests: 
+    testthat (>= 3.0.0),
+    writexl,
+    shinytest2
+Config/testthat/edition: 3
