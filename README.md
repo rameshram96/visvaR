@@ -27,5 +27,5 @@ Running any of this code will open a application in your browser, where you can 
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/rameshram96/visvaR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rameshram96/visvaR/actions/workflows/R-CMD-check.yaml)
-
+[![CRAN status](https://www.r-pkg.org/badges/version/visvaR)](https://CRAN.R-project.org/package=visvaR)
 <!-- badges: end -->
