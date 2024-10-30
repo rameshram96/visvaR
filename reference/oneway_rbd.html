@@ -54,7 +54,14 @@ method, and download outputs.</p>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>This Shiny app is part of the <code>visvaR</code> package and is designed for
-analysis of variance on data from randomized block design (one factor) and user can download the report in word format.</p>
+analysis of variance on data from randomized block design (one factor) and user can download the report in word format.
+The analysis of variance was performed using R's aov() function (Chambers &amp; Hastie, 1992; R Core Team, 2024), which implements the classical ANOVA methodology developed by Fisher (1925).</p>
+    </div>
+    <div class="section level2">
+    <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
+    <p>Fisher, R. A. (1925). Statistical Methods for Research Workers. Oliver and Boyd, Edinburgh.
+Scheffe, H. (1959). The Analysis of Variance. John Wiley &amp; Sons, New York.
+R Core Team (2024). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/</p>
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
@@ -63,6 +70,89 @@ analysis of variance on data from randomized block design (one factor) and user 
 <p>Tamilselvan Arumugam</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
+<span class="r-in"><span><span class="co"># Example 1: Basic usage</span></span></span>
+<span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu">oneway_rbd</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Example 2: Sample workflow with plant growth experiment</span></span></span>
+<span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="co"># Prepare sample data</span></span></span>
+<span class="r-in"><span>  <span class="va">plant_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    Treatment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Control"</span>, <span class="st">"Low"</span>, <span class="st">"Medium"</span>, <span class="st">"High"</span><span class="op">)</span>, each <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    Replication <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, times <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    Plant_Height <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">25.3</span>, <span class="fl">24.8</span>, <span class="fl">25.1</span>,  <span class="co"># Control</span></span></span>
+<span class="r-in"><span>                     <span class="fl">27.6</span>, <span class="fl">28.1</span>, <span class="fl">27.9</span>,  <span class="co"># Low</span></span></span>
+<span class="r-in"><span>                     <span class="fl">30.2</span>, <span class="fl">29.8</span>, <span class="fl">30.5</span>,  <span class="co"># Medium</span></span></span>
+<span class="r-in"><span>                     <span class="fl">26.8</span>, <span class="fl">27.2</span>, <span class="fl">26.5</span><span class="op">)</span>, <span class="co"># High</span></span></span>
+<span class="r-in"><span>    Leaf_Count <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">8</span>, <span class="fl">7</span>, <span class="fl">8</span>,    <span class="co"># Control</span></span></span>
+<span class="r-in"><span>                   <span class="fl">10</span>, <span class="fl">11</span>, <span class="fl">10</span>,  <span class="co"># Low</span></span></span>
+<span class="r-in"><span>                   <span class="fl">12</span>, <span class="fl">13</span>, <span class="fl">12</span>,  <span class="co"># Medium</span></span></span>
+<span class="r-in"><span>                   <span class="fl">9</span>, <span class="fl">8</span>, <span class="fl">9</span><span class="op">)</span>     <span class="co"># High</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># Save as Excel file</span></span></span>
+<span class="r-in"><span>  <span class="fu">write.xlsx</span><span class="op">(</span><span class="va">plant_data</span>, <span class="st">"plant_data.xlsx"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># Launch the app</span></span></span>
+<span class="r-in"><span>  <span class="fu">oneway_rbd</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># Instructions for users:</span></span></span>
+<span class="r-in"><span>  <span class="co"># 1. Click "Choose .xlsx or .csv" and select plant_data.xlsx</span></span></span>
+<span class="r-in"><span>  <span class="co"># 2. Select post-hoc test method (e.g., "Tukey HSD")</span></span></span>
+<span class="r-in"><span>  <span class="co"># 3. Customize plot appearance if desired:</span></span></span>
+<span class="r-in"><span>  <span class="co">#    - Choose bar color</span></span></span>
+<span class="r-in"><span>  <span class="co">#    - Select font style</span></span></span>
+<span class="r-in"><span>  <span class="co">#    - Adjust font size</span></span></span>
+<span class="r-in"><span>  <span class="co"># 4. Click "Analyze"</span></span></span>
+<span class="r-in"><span>  <span class="co"># 5. View results in different tabs</span></span></span>
+<span class="r-in"><span>  <span class="co"># 6. Download Word report</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># Clean up</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="st">"plant_data.xlsx"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Example 3: Using clipboard data</span></span></span>
+<span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="co"># Copy this to clipboard:</span></span></span>
+<span class="r-in"><span>  <span class="co"># Treatment,Replication,Yield</span></span></span>
+<span class="r-in"><span>  <span class="co"># Control,1,45.2</span></span></span>
+<span class="r-in"><span>  <span class="co"># Control,2,44.8</span></span></span>
+<span class="r-in"><span>  <span class="co"># Control,3,45.5</span></span></span>
+<span class="r-in"><span>  <span class="co"># Treatment1,1,48.6</span></span></span>
+<span class="r-in"><span>  <span class="co"># Treatment1,2,49.2</span></span></span>
+<span class="r-in"><span>  <span class="co"># Treatment1,3,48.9</span></span></span>
+<span class="r-in"><span>  <span class="co"># Treatment2,1,52.3</span></span></span>
+<span class="r-in"><span>  <span class="co"># Treatment2,2,51.8</span></span></span>
+<span class="r-in"><span>  <span class="co"># Treatment2,3,52.7</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="fu">oneway_rbd</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="co"># Click "Use Clipboard Data" after copying data</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Example 4: Multiple response variables</span></span></span>
+<span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="co"># Create data with multiple responses</span></span></span>
+<span class="r-in"><span>  <span class="va">multi_response_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    Treatment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Control"</span>, <span class="st">"Treatment1"</span>, <span class="st">"Treatment2"</span><span class="op">)</span>, each <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    Replication <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, times <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    Height <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">12</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">20</span>,<span class="fl">4</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">25</span>,<span class="fl">4</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">30</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span>, sd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    Weight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">12</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">50</span>,<span class="fl">4</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">60</span>,<span class="fl">4</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">70</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span>, sd <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    Length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">12</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">4</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">12</span>,<span class="fl">4</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">15</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># Save as Excel file</span></span></span>
+<span class="r-in"><span>  <span class="fu">write.xlsx</span><span class="op">(</span><span class="va">multi_response_data</span>, <span class="st">"multi_response.xlsx"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># Launch the app</span></span></span>
+<span class="r-in"><span>  <span class="fu">oneway_rbd</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span>  <span class="op">}</span> <span class="co"># }</span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 
