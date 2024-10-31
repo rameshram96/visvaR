@@ -11,7 +11,7 @@
 #' This function runs a local instance of the Shiny app in your default web
 #' browser. The app interface allows users to upload data, select analysis
 #' method, and download outputs.
-#'
+#' @aliases twoway_crd()
 #' @usage twoway_crd()
 #' @examples
 #' \dontrun{
