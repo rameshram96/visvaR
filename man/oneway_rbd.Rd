@@ -2,6 +2,7 @@
 % Please edit documentation in R/oneway_rbd.R
 \name{oneway_rbd}
 \alias{oneway_rbd}
+\alias{oneway_rbd()}
 \title{Run the Shiny App for performing one-way ANOVA on data from a Randomized block design.}
 \usage{
 oneway_rbd()

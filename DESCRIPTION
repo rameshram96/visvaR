@@ -34,7 +34,8 @@ Imports:
     utils,
     stats,
     graphics,
-    grDevices
+    grDevices,
+    extrafont
 Suggests: 
     testthat (>= 3.0.0),
     writexl,

@@ -2,6 +2,7 @@
 % Please edit documentation in R/oneway_crd.R
 \name{oneway_crd}
 \alias{oneway_crd}
+\alias{oneway_crd()}
 \title{Run the Shiny App for performing one-way ANOVA on data from a completely randomized design.}
 \usage{
 oneway_crd()
