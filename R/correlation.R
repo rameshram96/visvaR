@@ -12,7 +12,7 @@
 #' This function runs a local instance of the Shiny app in your default web
 #' browser. The app interface allows users to upload data, select analysis
 #' methods, and download outputs.
-#' @aliases correlation_multi()
+#' @aliases cor_multiple
 #' @usage correlation_multi()
 #' @examples
 #' \dontrun{

@@ -2,6 +2,7 @@
 % Please edit documentation in R/correlation.R
 \name{correlation_multi()}
 \alias{correlation_multi()}
+\alias{cor_multiple}
 \title{Run the Shiny App for Correlation Analysis of multiple variables}
 \usage{
 correlation_multi()

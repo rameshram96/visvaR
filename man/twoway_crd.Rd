@@ -2,7 +2,7 @@
 % Please edit documentation in R/twoway_crd.R
 \name{twoway_crd}
 \alias{twoway_crd}
-\alias{twoway_crd()}
+\alias{anova2_crd}
 \title{Run the Shiny App for performing two-way ANOVA on data from a completely randomized design.}
 \usage{
 twoway_crd()
