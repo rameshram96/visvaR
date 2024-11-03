@@ -24,7 +24,7 @@
   check_and_import_fonts <- function() {
     # Check if a common font is available to determine if fonts are loaded
     if (!"Arial" %in% extrafont::fonts()) {
-      suppresspackageStartupMessage("Fonts not found. Importing fonts...")
+      packageStartupMessage("Fonts not found. Importing fonts...")
       extrafont::font_import(prompt = FALSE)
 
       # Load fonts based on OS
