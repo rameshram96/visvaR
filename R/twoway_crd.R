@@ -11,8 +11,10 @@
 #' This function runs a local instance of the Shiny app in your default web
 #' browser. The app interface allows users to upload data, select analysis
 #' method, and download outputs.
-#' @aliases anova2_crd
+#'
 #' @usage twoway_crd()
+#' @aliases anova2_crd
+#' @aliases twoway_crd
 #' @examples
 #' \dontrun{
 #' # Example 1: Basic usage

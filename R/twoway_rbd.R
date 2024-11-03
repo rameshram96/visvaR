@@ -14,8 +14,10 @@
 #' @references Fisher, R. A. (1925). Statistical Methods for Research Workers. Oliver and Boyd, Edinburgh.
 #'             Scheffe, H. (1959). The Analysis of Variance. John Wiley & Sons, New York.
 #'             R Core Team (2024). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/
-#' @aliases anova2_rbd
+#'
 #' @usage twoway_rbd()
+#' @aliases anova2_rbd
+#' @aliases twoway_rbd
 #' @name twoway_rbd
 #' @author Ramesh Ramasamy
 #' @author Mathiyarsai Kulandaivadivel

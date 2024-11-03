@@ -11,8 +11,10 @@
 #' This function runs a local instance of the Shiny app in your default web
 #' browser. The app interface allows users to upload data, select analysis
 #' method, and download outputs.
-#' @aliases anova1_rbd
+#'
 #' @usage oneway_rbd()
+#' @aliases anova1_rbd
+#' @aliases oneway_rbd
 #' @examples
 #' \dontrun{
 #' # Example 1: Basic usage

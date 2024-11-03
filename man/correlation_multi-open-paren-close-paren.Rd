@@ -3,6 +3,7 @@
 \name{correlation_multi()}
 \alias{correlation_multi()}
 \alias{cor_multiple}
+\alias{correlation_multi}
 \title{Run the Shiny App for Correlation Analysis of multiple variables}
 \usage{
 correlation_multi()
