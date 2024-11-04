@@ -6,7 +6,7 @@
 #' @details
 #' This Shiny app is part of the `visvaR` package and is designed for
 #' analysis of variance on data from completely randomized design (two factor) and user can download the report in word format.
-#' The analysis of variance was performed using R's aov() function (Chambers & Hastie, 1992; R Core Team, 2024), which implements the classical ANOVA methodology developed by Fisher (1925).
+#' The analysis of variance was performed using R's aov() function (Chambers & Hastie, 1992; R Core Team, 2024), which implements the classical ANOVA methodology developed by Fisher (1925). To use custom fonts, please install the `extrafont` package and run `extrafont::font_import()` and `extrafont::loadfonts()`.
 #' @return
 #' This function runs a local instance of the Shiny app in your default web
 #' browser. The app interface allows users to upload data, select analysis

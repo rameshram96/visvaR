@@ -19,7 +19,7 @@ and user can select the post-hoc test method and download the report which conta
 \details{
 This Shiny app is part of the \code{visvaR} package and is designed for
 analysis of variance on data from completely randomized design (one factor) and user can download the report in word format.
-The analysis of variance was performed using R's aov() function (Chambers & Hastie, 1992; R Core Team, 2024), which implements the classical ANOVA methodology developed by Fisher (1925).
+The analysis of variance was performed using R's aov() function (Chambers & Hastie, 1992; R Core Team, 2024), which implements the classical ANOVA methodology developed by Fisher (1925).To use custom fonts, please install the \code{extrafont} package and run \code{extrafont::font_import()} and \code{extrafont::loadfonts()}.
 }
 \examples{
 \dontrun{

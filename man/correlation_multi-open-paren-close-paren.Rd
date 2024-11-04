@@ -20,7 +20,7 @@ and select the correlation method and download the results with few customizatio
 \details{
 This Shiny app is part of the \code{visvaR} package and is designed for
 correlation analysis and user can download the report in word format also has
-option to download the correlation plot as .png file
+option to download the correlation plot as .png file. To use custom fonts, please install the \code{extrafont} package and run \code{extrafont::font_import()} and \code{extrafont::loadfonts()}.
 }
 \examples{
 \dontrun{

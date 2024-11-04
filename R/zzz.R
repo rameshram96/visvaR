@@ -21,24 +21,7 @@
   "If you torture the data long enough, it will confess to anything."
 )
 .onAttach <- function(libname, pkgname) {
-  check_and_import_fonts <- function() {
-    # Check if a common font is available to determine if fonts are loaded
-    if (!"Arial" %in% extrafont::fonts()) {
-      packageStartupMessage("Fonts not found. Importing fonts...")
-      extrafont::font_import(prompt = FALSE)
 
-      # Load fonts based on OS
-      if (Sys.info()["sysname"] == "Windows") {
-        extrafont::loadfonts(device = "win")
-      } else {
-        extrafont::loadfonts(device = "pdf")
-      }
-    }
-  }
-
-  # Run the check and import fonts if needed
-  check_and_import_fonts()
-  packageStartupMessage("Fonts loaded successfully for ", Sys.info()["sysname"])
   random_quote <- sample(.pkg_quotes, 1)
   msg <- paste0(
     "\n",

@@ -5,7 +5,7 @@
 #'
 #' @details
 #' This Shiny app is part of the `visvaR` package and is designed for
-#' analysis of variance randomized block design (two factor) and user can download the report in word format.
+#' analysis of variance randomized block design (two factor) and user can download the report in word format.To use custom fonts, please install the `extrafont` package and run `extrafont::font_import()` and `extrafont::loadfonts()`.
 #'
 #' @return
 #' This function runs a local instance of the Shiny app in your default web

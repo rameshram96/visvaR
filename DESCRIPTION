@@ -34,10 +34,10 @@ Imports:
     utils,
     stats,
     graphics,
-    grDevices,
-    extrafont
+    grDevices
 Suggests: 
     testthat (>= 3.0.0),
     writexl,
-    shinytest2
+    shinytest2,
+    extrafont
 Config/testthat/edition: 3

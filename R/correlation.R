@@ -6,7 +6,7 @@
 #' @details
 #' This Shiny app is part of the `visvaR` package and is designed for
 #' correlation analysis and user can download the report in word format also has
-#' option to download the correlation plot as .png file
+#' option to download the correlation plot as .png file. To use custom fonts, please install the `extrafont` package and run `extrafont::font_import()` and `extrafont::loadfonts()`.
 #'
 #' @return
 #' This function runs a local instance of the Shiny app in your default web
@@ -99,7 +99,7 @@ correlation_multi<-function(){
     "))
     ),
     shiny::h1("Correlation Analysis (Multiple variables)",
-              style = "font-family:Times New Roman; font-weight: bold; font-size: 36px; color: #4CAF50;"),
+              style = "font-family:Times New Roman; font-weight: bold; font-size: 36px; color: #890304;"),
 
     shiny::sidebarLayout(
       shiny::sidebarPanel(

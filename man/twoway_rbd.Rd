@@ -18,7 +18,7 @@ and user can select the post-hoc test method and download the report which conta
 }
 \details{
 This Shiny app is part of the \code{visvaR} package and is designed for
-analysis of variance randomized block design (two factor) and user can download the report in word format.
+analysis of variance randomized block design (two factor) and user can download the report in word format.To use custom fonts, please install the \code{extrafont} package and run \code{extrafont::font_import()} and \code{extrafont::loadfonts()}.
 }
 \references{
 Fisher, R. A. (1925). Statistical Methods for Research Workers. Oliver and Boyd, Edinburgh.
