@@ -12,11 +12,12 @@
 #' This function runs a local instance of the Shiny app in your default web
 #' browser. The app interface allows users to upload data, select analysis
 #' methods, and download outputs.
-#' @usage correlation_multi()
+#' @usage correlation_multi
 #' @aliases cor_multiple
 #' @aliases correlation_multi
+#' @name correlation_multi
+#' @export correlation_multi()
 #' @examples
-#' \dontrun{
 #' # Example 1: Basic usage
 #' if(interactive()) {
 #'   correlation_multi()
@@ -52,8 +53,7 @@
 #'   correlation_multi()
 #'   # Click "Paste from Clipboard" after copying data
 #' }
-#' }
-#' @name correlation_multi()
+#'
 #' @author Ramesh Ramasamy
 #' @author Mathiyarsai Kulandaivadivel
 #' @author Tamilselvan Arumugam

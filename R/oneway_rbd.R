@@ -15,8 +15,9 @@
 #' @usage oneway_rbd()
 #' @aliases anova1_rbd
 #' @aliases oneway_rbd
+#' @export oneway_rbd()
 #' @examples
-#' \dontrun{
+#'
 #' # Example 1: Basic usage
 #' if(interactive()) {
 #'   oneway_rbd()
@@ -94,7 +95,7 @@
 #'   # Launch the app
 #'   oneway_rbd()
 #'   }
-#'   }
+#'
 #' @references Fisher, R. A. (1925). Statistical Methods for Research Workers. Oliver and Boyd, Edinburgh.
 #'             Scheffe, H. (1959). The Analysis of Variance. John Wiley & Sons, New York.
 #'             R Core Team (2024). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/

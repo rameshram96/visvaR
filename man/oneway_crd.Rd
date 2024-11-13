@@ -22,7 +22,6 @@ analysis of variance on data from completely randomized design (one factor) and 
 The analysis of variance was performed using R's aov() function (Chambers & Hastie, 1992; R Core Team, 2024), which implements the classical ANOVA methodology developed by Fisher (1925).To use custom fonts, please install the \code{extrafont} package and run \code{extrafont::font_import()} and \code{extrafont::loadfonts()}.
 }
 \examples{
-\dontrun{
 # Example 1: Basic usage
 if(interactive()) {
   oneway_crd()
@@ -125,7 +124,6 @@ if(interactive()) {
   write.xlsx(yield_data, "temp_data.xlsx")
   oneway_crd()
   unlink("temp_data.xlsx")
-}
 }
 }
 \references{

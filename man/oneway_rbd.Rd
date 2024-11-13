@@ -22,7 +22,7 @@ analysis of variance on data from randomized block design (one factor) and user 
 The analysis of variance was performed using R's aov() function (Chambers & Hastie, 1992; R Core Team, 2024), which implements the classical ANOVA methodology developed by Fisher (1925).To use custom fonts, please install the \code{extrafont} package and run \code{extrafont::font_import()} and \code{extrafont::loadfonts()}.
 }
 \examples{
-\dontrun{
+
 # Example 1: Basic usage
 if(interactive()) {
   oneway_rbd()
@@ -100,7 +100,7 @@ if(interactive()) {
   # Launch the app
   oneway_rbd()
   }
-  }
+
 }
 \references{
 Fisher, R. A. (1925). Statistical Methods for Research Workers. Oliver and Boyd, Edinburgh.

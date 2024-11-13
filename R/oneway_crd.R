@@ -15,8 +15,8 @@
 #' @usage oneway_crd()
 #' @aliases anova1_crd
 #' @aliases oneway_crd
+#' @export oneway_crd()
 #' @examples
-#' \dontrun{
 #' # Example 1: Basic usage
 #' if(interactive()) {
 #'   oneway_crd()
@@ -119,7 +119,6 @@
 #'   write.xlsx(yield_data, "temp_data.xlsx")
 #'   oneway_crd()
 #'   unlink("temp_data.xlsx")
-#' }
 #' }
 #' @references Fisher, R. A. (1925). Statistical Methods for Research Workers. Oliver and Boyd, Edinburgh.
 #'             Scheffe, H. (1959). The Analysis of Variance. John Wiley & Sons, New York.
