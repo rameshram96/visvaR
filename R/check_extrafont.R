@@ -1,7 +1,7 @@
 #' function to make sure that extrafont package is installed properly and fonts are imported and loaded to be used in the pacakge
 #' @details To use custom fonts, please install the `extrafont` package and run `extrafont::font_import()` and `extrafont::loadfonts()`.
 #'
-#' @title check_extrafont()
+#' @title Function to make sure necessary fonts are imported from system
 #' @description
 #' function to make sure that extrafont package is installed properly and fonts are imported and loaded to be used in the pacakge
 #' @name check_extrafont

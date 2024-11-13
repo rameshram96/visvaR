@@ -2,7 +2,7 @@
 % Please edit documentation in R/check_extrafont.R
 \name{check_extrafont}
 \alias{check_extrafont}
-\title{check_extrafont()}
+\title{Function to make sure necessary fonts are imported from system}
 \usage{
 check_extrafont()
 }
@@ -10,5 +10,7 @@ check_extrafont()
 function to make sure that extrafont package is installed properly and fonts are imported and loaded to be used in the pacakge
 }
 \details{
+function to make sure that extrafont package is installed properly and fonts are imported and loaded to be used in the pacakge
+
 To use custom fonts, please install the \code{extrafont} package and run \code{extrafont::font_import()} and \code{extrafont::loadfonts()}.
 }
