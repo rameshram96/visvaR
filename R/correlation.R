@@ -16,7 +16,6 @@
 #' @aliases cor_multiple
 #' @aliases correlation_multi
 #' @name correlation_multi
-#' @export correlation_multi()
 #' @examples
 #' # Example 1: Basic usage
 #' if(interactive()) {
@@ -73,6 +72,7 @@
 #' @importFrom graphics par
 #' @importFrom grDevices png dev.off
 NULL
+#' @export
 correlation_multi<-function(){
   default_data <- data.frame(
     Var1 = stats::rnorm(10),

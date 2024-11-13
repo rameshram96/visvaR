@@ -15,7 +15,6 @@
 #' @usage oneway_crd()
 #' @aliases anova1_crd
 #' @aliases oneway_crd
-#' @export oneway_crd()
 #' @examples
 #' # Example 1: Basic usage
 #' if(interactive()) {
@@ -148,6 +147,7 @@
 
 NULL
 utils::globalVariables(c("Fitted",'read_excel', "Residuals", "Sample", "Factor_A", "Response", "avg_A", "se",'captionpaste'))
+#' @export
 oneway_crd<-function(){
   ui<- page_fluid(
     theme = bs_theme(

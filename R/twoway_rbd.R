@@ -18,7 +18,6 @@
 #' @usage twoway_rbd()
 #' @aliases anova2_rbd
 #' @aliases twoway_rbd
-#' @export twoway_rbd()
 #' @name twoway_rbd
 #' @examples
 #'
@@ -156,6 +155,7 @@
 #' @importFrom shiny tags shinyApp
 NULL
 utils::globalVariables(c("Fitted", "Residuals",'read_excel', "Sample", "Factor_A", "Response", "avg_AB", "se","Factor_B","LSD_AB$groups","response",'rownames(LSD_AB$groups)'))
+#' @export
 twoway_rbd<-function(){
   ui <- page_fluid(
   theme = bs_theme(

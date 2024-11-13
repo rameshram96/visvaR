@@ -15,7 +15,7 @@
 #' @usage oneway_rbd()
 #' @aliases anova1_rbd
 #' @aliases oneway_rbd
-#' @export oneway_rbd()
+#' @export oneway_rbd
 #' @examples
 #'
 #' # Example 1: Basic usage

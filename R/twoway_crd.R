@@ -15,7 +15,6 @@
 #' @usage twoway_crd()
 #' @aliases anova2_crd
 #' @aliases twoway_crd
-#' @export twoway_crd()
 #' @examples
 #'
 #' # Example 1: Basic usage
@@ -157,6 +156,7 @@
 #' @importFrom shiny tags shinyApp
 NULL
 utils::globalVariables(c("Fitted", "Residuals", "Sample", "Factor_A", "Response", "avg_AB", "se","Factor_B","LSD_AB$groups","response",'read_excel','rownames(LSD_AB$groups)'))
+#' @export
 twoway_crd<-function(){
   ui <- page_fluid(
     theme = bs_theme(
