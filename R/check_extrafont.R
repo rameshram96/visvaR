@@ -9,7 +9,6 @@ check_extrafont <- function() {
   if (!requireNamespace("extrafont", quietly = TRUE)) {
     stop("The 'extrafont' package is required. Please install it with install.packages('extrafont').")
   }
-
   if (length(extrafont::fonts()) == 0) {
     stop("Fonts are not imported yet. Please run 'extrafont::font_import()' and 'extrafont::loadfonts()' (requires administrator privileges).")
   }
