@@ -41,6 +41,6 @@ extrafont::loadfonts()
 <!-- badges: end -->
 <!-- badges: start -->
 
-[![](https://cranlogs.r-pkg.org/badges/visvaR)](https://cran.r-project.org/package=visvaR)
-[![](https://cranlogs.r-pkg.org/badges/visvaR)](https://cranlogs.r-pkg.org/badges/grand-total/visvaR)
+[![](https://cranlogs.r-pkg.org/badges/visvaR)]
+[![](https://cranlogs.r-pkg.org/badges/grand-total/visvaR)]
 <!-- badges: end -->
