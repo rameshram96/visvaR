@@ -2,7 +2,7 @@ pandoc: 3.1.11
 pkgdown: 2.1.1
 pkgdown_sha: ~
 articles: {}
-last_built: 2024-11-17T07:49Z
+last_built: 2024-11-17T07:51Z
 urls:
   reference: https://rameshram96.github.io/visvaR/reference
   article: https://rameshram96.github.io/visvaR/articles
